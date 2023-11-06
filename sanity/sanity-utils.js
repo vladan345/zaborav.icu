@@ -18,6 +18,7 @@ export async function getBlogs() {
     "slug": slug.current,
     "image": image.asset->url,
     content
-  }`
+  }`,
+    { next: { revalidate: 3600 } }
   );
 }

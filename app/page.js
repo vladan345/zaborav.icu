@@ -12,7 +12,7 @@ export default async function Home() {
       <div className="grid-cols-3 grid gap-10">
         {blogs.map((blog) => (
           <div
-            className="bg-slate-800 rounded-[12px] min-h-[400px]"
+            className="bg-secondary rounded-[12px] min-h-[400px] border-2 border-b-color"
             key={blog._id}
           >
             <Image

@@ -58,7 +58,11 @@ h3 {
   line-height: 1;
   letter-spacing: 2.8px;
 }
-
+.nav-link {
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 2px;
+}
 .button-text {
   border: 2px solid var(--b-color);
   border-radius: 20px;

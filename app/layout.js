@@ -21,10 +21,21 @@ export default function RootLayout({ children }) {
               </Link>
 
               <nav className="flex gap-5 nav-link">
-                <Link href="/">Home</Link>
-                <Link href="/blogs">Blogs</Link>
-                <Link href="/techs">Techs</Link>
-                <Link href="/#contact">Contact</Link>
+                <Link className="nav-link" href="/">
+                  Home
+                </Link>
+                <Link className="nav-link" href="/blogs">
+                  Blogs
+                </Link>
+                <Link className="nav-link" href="/techs">
+                  Techs
+                </Link>
+                <Link className="nav-link" href="/#contact">
+                  Contact
+                </Link>
+                <Link className="nav-link" href="/about">
+                  About
+                </Link>
               </nav>
 
               <div

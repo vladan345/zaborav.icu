@@ -10,7 +10,7 @@ export async function getBlogs() {
     useCdn: false,
   });
 
-  return client.fetch(
+  const res = await client.fetch(
     groq`*[_type == "blog"]{
     _id,
     _createdAt,
@@ -19,6 +19,8 @@ export async function getBlogs() {
     "image": image.asset->url,
     content
   }`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 30 } }
   );
+
+  return res;
 }

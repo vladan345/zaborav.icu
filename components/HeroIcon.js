@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HeroIcon({ icon, isDark, className }) {
   return (
-    <div className={className}>
+    <div className={`${className} scale-0`}>
       <Image
         src={`/svgs/${icon}.svg`}
         width={60}

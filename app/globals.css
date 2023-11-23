@@ -60,7 +60,7 @@ h3 {
 }
 .nav-link {
   font-size: 20px;
-  line-height: 1;
+  line-height: 1.5em;
   letter-spacing: 2px;
 }
 .button-text {
@@ -86,4 +86,13 @@ h3 {
 }
 .button-text:hover {
   transform: translate(10px, -10px);
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(20px);
+  }
 }

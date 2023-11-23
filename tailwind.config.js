@@ -15,6 +15,9 @@ module.exports = {
         green: "var(--green)",
         background: "var(--background)",
       },
+      animation: {
+        float: "float 3s ease-in-out alternate infinite",
+      },
     },
     spacing: {
       1: "10px",

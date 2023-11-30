@@ -7,47 +7,25 @@ import HeroIcon from "@/components/HeroIcon";
 import { useContext, useRef, useEffect } from "react";
 import { ThemeContext } from "@/context/ThemeContext.js";
 import gsap from "gsap";
-import { TimelineMax } from "gsap/gsap-core";
+import { heroFloating } from "@/animations/hero";
 gsap.registerPlugin();
+
 export default function Hero() {
   const isDark = useContext(ThemeContext);
   const main = useRef();
 
-  const getRandomNumberWithDecimal = (min, max, increment) =>
-    (
-      Math.floor(Math.random() * ((max - min) / increment + 1)) * increment +
-      min
-    ).toFixed(1);
-
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to(".icon", {
-        scale: 1,
-        duration: 0.3,
-        stagger: 0.1,
-      });
-      const icons = gsap.utils.toArray(".icon");
-      icons.forEach((icon) => {
-        const randomValue = getRandomNumberWithDecimal(2, 3, 0.1);
-        const tl = gsap.timeline({ repeat: -1 });
-
-        tl.to(icon, {
-          y: 20,
-          duration: randomValue,
-          ease: "power1.inOut",
-        }).to(icon, {
-          y: 0,
-          duration: randomValue,
-          ease: "power1.inOut",
-        });
-      });
+      heroFloating();
     }, main.current);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={main} className="h-screen max-w-[1360px] w-full mx-auto flex">
+    <section
+      ref={main}
+      className="h-screen max-w-[1360px] w-full mx-auto flex relative"
+    >
       <div className="w-2/3 h-full flex flex-col gap-5 justify-center">
         <h1>Zaborav.icu</h1>
         <p className="subheading max-w-[460px]">
@@ -57,7 +35,7 @@ export default function Hero() {
       </div>
       <div className="w-1/3 flex items-center">
         <div className="w-[450px] h-[450px] relative">
-          <div className="border-2 border-b-color rounded-[20px] w-full h-full bg-secondary absolute top-[15px] left-[-15px] hover:top-[0] hover:left-[0] transition-all duration-300 ease-in-out">
+          <div className="border-2 border-b-color rounded-[20px] w-full h-full bg-secondary absolute top-[15px] left-[-15px] hover:top-[0] hover:left-[0] transition-all duration-500 ease-in-out">
             <HeroIcon
               className="icon absolute top-[-30px] left-[30%]"
               icon="ex"
@@ -105,6 +83,25 @@ export default function Hero() {
             />
           </div>
           <div className="border-2 border-b-color rounded-[20px] w-full h-full bg-green "></div>
+        </div>
+      </div>
+      <div className="absolute left-1/2 bottom-2 -translate-x-1/2">
+        <span className="mb-1 block button">scroll</span>
+        <div className="relative w-[75px] h-[82px] group">
+          <Image
+            src="/svgs/hero/triangle-l-b.svg"
+            alt="scroll icon"
+            width={60}
+            height={51}
+            className="absolute right-[0] top-0"
+          />
+          <Image
+            src="/svgs/hero/triangle-l-f.svg"
+            alt="scroll icon"
+            width={60}
+            height={51}
+            className="absolute right-[0] top-0 -translate-x-[12px] translate-y-[6px] group-hover:-translate-x-[0] group-hover:translate-y-[0] duration-300 ease-in-out"
+          />
         </div>
       </div>
     </section>

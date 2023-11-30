@@ -20,10 +20,14 @@ html {
   html.dark {
     --text: #ededed;
     --secondary: #2e2e2e;
-    --b-color: #9c9c9c;
-    --green: #ac6cff;
+    --b-color: #8f8f8f;
+    --green: #4d63b2;
     --background: #121212;
   }
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -86,13 +90,4 @@ h3 {
 }
 .button-text:hover {
   transform: translate(10px, -10px);
-}
-
-@keyframes float {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(20px);
-  }
 }

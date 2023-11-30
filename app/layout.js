@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
                 </Link>
               </nav>
 
-              <div
+              {/* <div
                 onClick={() => {
                   setIsDark(!isDark);
                 }}
@@ -47,12 +47,12 @@ export default function RootLayout({ children }) {
                 <div className="rounded-full w-[60px] h-[30px] border-2 border-b-color bg-green"></div>
                 <div className="rounded-full w-[60px] h-[30px] border-2 border-b-color bg-secondary absolute top-[5px] left-[-5px] transition-all duration-300 hover:top-[0] hover:left-[0]">
                   <span
-                    className={`w-[18px] h-[18px] rounded-full border-2 border-b-color bg-green block absolute top-1/2 -translate-y-1/2 transition-all duration-500 ${
+                    className={`w-[18px] h-[18px] rounded-full border-2 border-b-color bg-green block absolute top-1/2 -translate-y-1/2 transition-all duration-300 ${
                       isDark ? "left-[35px]" : "left-[5px]"
                     }`}
                   ></span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </header>
           <main className="px-5">{children}</main>

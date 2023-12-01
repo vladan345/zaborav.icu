@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
                 </Link>
               </nav>
 
-              {/* <div
+              <div
                 onClick={() => {
                   setIsDark(!isDark);
                 }}
@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
                     }`}
                   ></span>
                 </div>
-              </div> */}
+              </div>
             </div>
           </header>
           <main className="px-5">{children}</main>

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -10,6 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Techs({ techs }) {
   const { theme } = useTheme();
+  const [globalTheme, setGlobalTheme] = useState();
+
+  useEffect(() => {
+    setGlobalTheme(theme);
+  }, [theme]);
   // useEffect(() => {
   //   const ctx =
 
@@ -31,7 +36,7 @@ export default function Techs({ techs }) {
               <div className="relative w-full h-full cursor-pointer min-h-[270px]">
                 <div className="w-full h-full absolute top-[-15px] left-[15px] bg-green border-2 border-b-color rounded-[20px] p-[50px] pb-0 transition duration-500"></div>
                 <div className="absolute h-full w-full top-[0px] left-[0px] hover:top-[-15px] hover:left-[15px] border-2 border-b-color rounded-[20px] bg-secondary transition-all duration-500 ease-in-out p-[20px] flex justify-center">
-                  {theme == "light" ? (
+                  {globalTheme == "light" ? (
                     <Image
                       src={`/svgs/techs/${tech.id}-l.svg`}
                       alt={tech.title}

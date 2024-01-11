@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -10,6 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Latest({ posts }) {
   const { theme } = useTheme();
+  const [globalTheme, setGlobalTheme] = useState();
+
+  useEffect(() => {
+    setGlobalTheme(theme);
+  }, [theme]);
   // useEffect(() => {
   //   const ctx =
 
@@ -35,7 +40,7 @@ export default function Latest({ posts }) {
               <div className="absolute h-full w-full top-[0px] left-[0px] hover:top-[-15px] hover:left-[15px] border-2 border-b-color rounded-[20px] bg-secondary transition-all duration-500 ease-in-out p-[50px] pb-[0] flex">
                 <h3 className="w-4/5">{post.title}</h3>
                 <div className="w-1/5 h-4/5 flex flex-col items-center self-end">
-                  {theme == "light" ? (
+                  {globalTheme == "light" ? (
                     <Image
                       src={`/svgs/techs/${post.category[0]}-l.svg`}
                       alt={post.category[1]}

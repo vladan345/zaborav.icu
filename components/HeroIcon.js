@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function HeroIcon({ icon, theme, className }) {
+export default function HeroIcon({ icon, className, theme }) {
   return (
     <div className={`${className} scale-0`}>
       <Image

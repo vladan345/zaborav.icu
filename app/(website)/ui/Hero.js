@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import Image from "next/image";
 import HeroIcon from "@/components/HeroIcon";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { heroFloating } from "@/animations/hero";
 import { useTheme } from "@/context/ThemeContext";
@@ -12,16 +12,19 @@ gsap.registerPlugin();
 
 export default function Hero() {
   const { theme } = useTheme();
-
+  const [globalTheme, setGlobalTheme] = useState();
   const main = useRef();
 
   useEffect(() => {
-    console.log(theme);
     const ctx = gsap.context(() => {
       heroFloating();
     }, main.current);
     return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    setGlobalTheme(theme);
+  }, [theme]);
 
   return (
     <section
@@ -41,47 +44,47 @@ export default function Hero() {
             <HeroIcon
               className="icon absolute top-[-30px] left-[30%]"
               icon="ex"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute top-[94px] left-[-5%]"
               icon="pacman"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute top-[109px] left-[46%]"
               icon="plus"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute top-[38px] right-[-5%]"
               icon="progress"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute top-[45%] right-[10%]"
               icon="circle"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute bottom-[80px] left-[33%]"
               icon="star"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute bottom-[34px] left-[-8%]"
               icon="square"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute bottom-[80px] right-[15%]"
               icon="star2"
-              theme={theme}
+              theme={globalTheme}
             />
             <HeroIcon
               className="icon absolute bottom-[-40px] right-[30%]"
               icon="donut"
-              theme={theme}
+              theme={globalTheme}
             />
           </div>
           <div className="border-2 border-b-color rounded-[20px] w-full h-full bg-green "></div>
@@ -90,7 +93,7 @@ export default function Hero() {
       <div className="absolute left-1/2 bottom-2 -translate-x-1/2">
         <span className="mb-1 block button">scroll</span>
         <div className="relative w-[75px] h-[82px] group">
-          {theme == "dark" ? (
+          {globalTheme == "dark" ? (
             <>
               <Image
                 src="/svgs/hero/triangle-d-b.svg"

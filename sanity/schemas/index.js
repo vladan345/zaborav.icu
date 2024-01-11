@@ -1,7 +1,8 @@
 // Ovde dodajes jos schema, ne u configu
 
-import blog from "./project-shcema";
+import post from "./post";
+import category from "./category";
 
-const shcemas = [blog];
+const shcemas = [post, category];
 
 export default shcemas;

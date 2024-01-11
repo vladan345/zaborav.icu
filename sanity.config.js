@@ -9,8 +9,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const config = defineConfig({
   projectId,
   dataset,
-  title: "Dement.io",
-  apiVersion: "2023-11-05",
+  title: "Zaborav.icu",
   basePath: "/admin",
   plugins: [deskTool()],
   schema: { types: schemas },

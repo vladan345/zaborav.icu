@@ -1,6 +1,6 @@
-const blog = {
-  name: "blog",
-  title: "Blogs",
+export default {
+  name: "post",
+  title: "Posts",
   type: "document",
   fields: [
     {
@@ -9,23 +9,16 @@ const blog = {
       type: "string",
     },
     {
+      name: "category",
+      title: "Category",
+      type: "reference",
+      to: [{ type: "category" }],
+    },
+    {
       name: "slug",
       title: "Slug",
       type: "slug",
       options: { source: "name" },
-    },
-    {
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: { hotspot: true },
-      fields: [
-        {
-          name: "alt",
-          title: "Alt",
-          type: "string",
-        },
-      ],
     },
     {
       name: "content",
@@ -35,5 +28,3 @@ const blog = {
     },
   ],
 };
-
-export default blog;

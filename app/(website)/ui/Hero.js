@@ -4,17 +4,19 @@ import Button from "@/components/Button";
 import Image from "next/image";
 import HeroIcon from "@/components/HeroIcon";
 
-import { useContext, useRef, useEffect } from "react";
-import { ThemeContext } from "@/context/ThemeContext.js";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { heroFloating } from "@/animations/hero";
+import { useTheme } from "@/context/ThemeContext";
 gsap.registerPlugin();
 
 export default function Hero() {
-  const isDark = useContext(ThemeContext);
+  const { theme } = useTheme();
+
   const main = useRef();
 
   useEffect(() => {
+    console.log(theme);
     const ctx = gsap.context(() => {
       heroFloating();
     }, main.current);
@@ -39,47 +41,47 @@ export default function Hero() {
             <HeroIcon
               className="icon absolute top-[-30px] left-[30%]"
               icon="ex"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute top-[94px] left-[-5%]"
               icon="pacman"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute top-[109px] left-[46%]"
               icon="plus"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute top-[38px] right-[-5%]"
               icon="progress"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute top-[45%] right-[10%]"
               icon="circle"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute bottom-[80px] left-[33%]"
               icon="star"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute bottom-[34px] left-[-8%]"
               icon="square"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute bottom-[80px] right-[15%]"
               icon="star2"
-              isDark={isDark}
+              theme={theme}
             />
             <HeroIcon
               className="icon absolute bottom-[-40px] right-[30%]"
               icon="donut"
-              isDark={isDark}
+              theme={theme}
             />
           </div>
           <div className="border-2 border-b-color rounded-[20px] w-full h-full bg-green "></div>
@@ -88,20 +90,41 @@ export default function Hero() {
       <div className="absolute left-1/2 bottom-2 -translate-x-1/2">
         <span className="mb-1 block button">scroll</span>
         <div className="relative w-[75px] h-[82px] group">
-          <Image
-            src="/svgs/hero/triangle-l-b.svg"
-            alt="scroll icon"
-            width={60}
-            height={51}
-            className="absolute right-[0] top-0"
-          />
-          <Image
-            src="/svgs/hero/triangle-l-f.svg"
-            alt="scroll icon"
-            width={60}
-            height={51}
-            className="absolute right-[0] top-0 -translate-x-[12px] translate-y-[6px] group-hover:-translate-x-[0] group-hover:translate-y-[0] duration-300 ease-in-out"
-          />
+          {theme == "dark" ? (
+            <>
+              <Image
+                src="/svgs/hero/triangle-d-b.svg"
+                alt="scroll icon"
+                width={60}
+                height={51}
+                className="absolute right-[0] top-0"
+              />
+              <Image
+                src="/svgs/hero/triangle-d-f.svg"
+                alt="scroll icon"
+                width={60}
+                height={51}
+                className="absolute right-[0] top-0 -translate-x-[12px] translate-y-[6px] group-hover:-translate-x-[0] group-hover:translate-y-[0] duration-300 ease-in-out"
+              />
+            </>
+          ) : (
+            <>
+              <Image
+                src="/svgs/hero/triangle-l-b.svg"
+                alt="scroll icon"
+                width={60}
+                height={51}
+                className="absolute right-[0] top-0"
+              />
+              <Image
+                src="/svgs/hero/triangle-l-f.svg"
+                alt="scroll icon"
+                width={60}
+                height={51}
+                className="absolute right-[0] top-0 -translate-x-[12px] translate-y-[6px] group-hover:-translate-x-[0] group-hover:translate-y-[0] duration-300 ease-in-out"
+              />
+            </>
+          )}
         </div>
       </div>
     </section>

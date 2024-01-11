@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-html {
+body.light {
   --text: #2e2e2e;
   --secondary: #ededed;
   --b-color: #2e2e2e;
@@ -17,7 +17,7 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-  html.dark {
+  body.dark {
     --text: #ededed;
     --secondary: #2e2e2e;
     --b-color: #8f8f8f;
@@ -33,6 +33,7 @@ body::-webkit-scrollbar {
 body {
   color: var(--text);
   background: var(--background);
+  transition: background 0.5s;
 }
 
 h1 {
@@ -87,6 +88,7 @@ h3 {
   left: 10px;
   top: -10px;
   display: inline-block;
+  transition: 0.3s ease-in-out;
 }
 .button-text:hover {
   transform: translate(10px, -10px);

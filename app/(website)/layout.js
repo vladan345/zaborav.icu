@@ -11,7 +11,7 @@ const worksans = Work_Sans({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={worksans.className}>
+      <body className={`${worksans.className} dark`}>
         <ThemeProvider>
           <Header />
           <main className="px-5">{children}</main>

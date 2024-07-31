@@ -9,40 +9,44 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    strategy:
+      matrix:
+        node-version: [20.x] # Use the Node.js version compatible with your project
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: "20" # Use the Node.js version compatible with your project
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Next.js application
         env:
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
-          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET}}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
         run: npm run build
 
-      - name: Deploy to CapRover
-        env:
-          CAPROVER_SERVER: ${{ secrets.CAPROVER_SERVER }}
-          CAPROVER_APP_TOKEN: ${{ secrets.APP_TOKEN }}
-          CAPROVER_APP_NAME: ${{ secrets.APP_NAME }}
-        run: |
-          # Create a tarball of the built project
-          tar -czf build.tar.gz .next public
+      - name: Create deployment package
+        uses: a7ul/tar-action@v1.1.0
+        with:
+          command: c
+          cwd: "./"
+          files: |
+            .next/
+            public/
+            package.json
+            next.config.js
+          outPath: deploy.tar
 
-          # Install CapRover CLI
-          npm install -g caprover
-
-          # Deploy to CapRover
-          caprover deploy \
-            -h $CAPROVER_SERVER \
-            -t $CAPROVER_APP_TOKEN \
-            -a $CAPROVER_APP_NAME \
-            --branch master \
-            --tarball build.tar.gz
+      - name: Deploy App to CapRover
+        uses: caprover/deploy-from-github@v1.0.1
+        with:
+          server: "${{ secrets.CAPROVER_SERVER }}"
+          app: "${{ secrets.APP_NAME }}"
+          token: "${{ secrets.APP_TOKEN }}"

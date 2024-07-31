@@ -3,7 +3,7 @@ name: Deploy to CapRover
 on:
   push:
     branches:
-      - main # Trigger deployment on push to the main branch
+      - master # Trigger deployment on push to the master branch
 
 jobs:
   build-and-deploy:
@@ -44,5 +44,5 @@ jobs:
             -h $CAPROVER_SERVER \
             -t $CAPROVER_APP_TOKEN \
             -a $CAPROVER_APP_NAME \
-            --branch main \
+            --branch master \
             --tarball build.tar.gz

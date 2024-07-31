@@ -27,9 +27,6 @@ jobs:
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET}}
         run: npm run build
 
-      - name: Export Next.js application (optional, if using static export)
-        run: npm run start
-
       - name: Deploy to CapRover
         env:
           CAPROVER_SERVER: ${{ secrets.CAPROVER_SERVER }}

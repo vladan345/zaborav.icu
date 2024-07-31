@@ -1,0 +1,48 @@
+name: Deploy to CapRover
+
+on:
+  push:
+    branches:
+      - main # Trigger deployment on push to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20" # Use the Node.js version compatible with your project
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js application
+        run: npm run build
+
+      - name: Export Next.js application (optional, if using static export)
+        run: npm run start
+
+      - name: Deploy to CapRover
+        env:
+          CAPROVER_SERVER: ${{ secrets.CAPROVER_SERVER }}
+          CAPROVER_APP_TOKEN: ${{ secrets.APP_TOKEN }}
+          CAPROVER_APP_NAME: ${{ secrets.APP_NAME }}
+        run: |
+          # Create a tarball of the built project
+          tar -czf build.tar.gz .next public
+
+          # Install CapRover CLI
+          npm install -g caprover
+
+          # Deploy to CapRover
+          caprover deploy \
+            -h $CAPROVER_SERVER \
+            -t $CAPROVER_APP_TOKEN \
+            -a $CAPROVER_APP_NAME \
+            --branch main \
+            --tarball build.tar.gz
